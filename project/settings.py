@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 import environ
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -61,7 +62,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # local
     "accounts",
-    "things",
+    "cookie_stands",
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "yxjofgcq",
+#         "USER": "yxjofgcq",
+#         "PASSWORD": "h1oZnO4TiB5MRZlfVmKnQLDEtt985TnE",
+#         "HOST": "mahmud.db.elephantsql.com",
+#         "PORT": 5432,
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": env.str("DATABASE_ENGINE"),

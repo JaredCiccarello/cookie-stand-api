@@ -1,66 +1,58 @@
-{% load static %}
-
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{% block title %}All the Things{% endblock %}</title>
- <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50">
-<header>
-  <nav class="bg-gray-900 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="{% url 'home' %}">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Things_Logo.svg" class="p-3 h-12 bg-white rounded" alt="Logo" />
-          </a>
-          <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
-            <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-            {% if request.user.is_authenticated %}
-            <li>
-                <a href="{% url 'logout' %}" class="block py-2 pl-3 pr-4 text-white bg-green-700 rounded md:bg-transparent  md:p-0 dark:text-white" aria-current="page">Log Out</a>
-              </li>
-              {% else %}
-              <li>
-                <a href="{% url 'login' %}" class="block py-2 pl-3 pr-4 text-white bg-green-700 rounded md:bg-transparent  md:p-0 dark:text-white" aria-current="page">Log In</a>
-              </li>
-            {% endif %}
-
-              <li>
-                <a href="{% url 'about' %}" class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-              </li>
-              {% if request.user.is_authenticated %}
-                <li>
-                <a href="{% url 'thing_list' %}" class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">List</a>
-                </li>
-                 <li>
-                <a href="{% url 'thing_create' %}" class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Create</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
-</header>
-<main>
-<div class="container mx-auto mt-4">
-  {% block content %}
-  {% endblock content %}
-</div>
-</main>
-<footer
-      class="bg-gray-900
-             text-sm text-white
-             fixed
-             inset-x-0
-             bottom-0
-             p-2">
-      &copy; CodeFellows 2023
-    </footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+  <div
+    class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <form class="space-y-6" method="POST">
+      {% csrf_token %}
+      <h5 class="text-xl font-medium text-gray-900 dark:text-white">Create a Cookie Stand</h5>
+      <div>
+        <label for="id_location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+        <input type="text" name="location" id="id_location"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+               placeholder="e.g. Seattle" required>
+      </div>
+      <div>
+        <label for="id_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+        <input type="text" name="description" id="id_description"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+               placeholder="e.g. Description" required>
+      </div>
+      <div>
+        <label for="id_hourly_sales" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hourly Sales</label>
+        <input type="number" name="hourly_sales" id="id_hourly_sales"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+               value="0" min="0" max="" required>
+      </div>
+      <div>
+        <label for="id_min_cust_hour" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Minimum Customers Per Hour</label>
+        <input type="number" name="min_cust_hour" id="id_min_cust_hour"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+               value="0" min="0" max="" required>
+      </div>
+      <div>
+        <label for="id_max_cust_hour" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maximum Customers Per Hour</label>
+        <input type="number" name="max_cust_hour" id="id_max_cust_hour"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+               value="0" min="0" max="" required>
+      </div>
+      <div>
+        <label for="id_avg_cookies_per_sale" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Average Cookies Per Sale</label>
+        <input type="number" name="id_avg_cookies_per_sale" id="id_avg_cookies_per_sale"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+               value="0" min="0" max="" required>
+      </div>
+      <div>
+        <label for="id_owner" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Owner</label>
+        <select name="owner" id="id_owner">
+          {% for value, choice in form.fields.owner.choices %}
+            <option value="{{ value }}">{{  choice }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit"
+              class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Create
+      </button>
+    </form>
+  </div>
+{% endblock content %}
