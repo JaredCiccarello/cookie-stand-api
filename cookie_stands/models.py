@@ -16,18 +16,4 @@ class CookieStand(models.Model):
 
     def __str__(self):
         return self.location
-    
-    # name = models.CharField(max_length=256)
-    # rating = models.IntegerField(default=0, blank=True)
-    # reviewer = models.ForeignKey(
-    #     get_user_model(), on_delete=models.CASCADE, null=True, blank=True
-    # )
-    # description = models.TextField(default="", null=True, blank=True)
-
-    # def __str__(self):
-    #     return self.name
-
-    # def get_absolute_url(self):
-    #     return reverse('CookieStand_detail', args=[str(self.id)])
-
 

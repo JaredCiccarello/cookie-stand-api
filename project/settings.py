@@ -99,19 +99,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "yxjofgcq",
-#         "USER": "yxjofgcq",
-#         "PASSWORD": "h1oZnO4TiB5MRZlfVmKnQLDEtt985TnE",
-#         "HOST": "mahmud.db.elephantsql.com",
-#         "PORT": 5432,
-#     }
-# }
 DATABASES = {
     "default": {
         "ENGINE": env.str("DATABASE_ENGINE"),
