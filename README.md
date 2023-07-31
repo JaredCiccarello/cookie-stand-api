@@ -39,11 +39,6 @@ Template Project for starting up CRUD API with Django Rest Framework
 
 
 
-Issues:
-.env
-no secret key
-
-
 
 
 # Lab - Class 34
@@ -75,9 +70,12 @@ Raven Robertson
 env sample used
 
 ## How to initialize/run your application
-python manage.py runserver
 docker compose up --build
-runs at http://localhost:8000/api/v1/cookie-stand
+docker compose up
+Will render http://127.0.0.1:8000/
+
+runs at http://127.0.0.1:8000/api/v1/stand/
+
 ## Libraries / Requirements
 
 asgiref==3.7.2
